@@ -9,7 +9,7 @@ class Card:
     is_winner: bool
 
     def __init__(self, card_as_string: str):
-        self.number = [list(map(int, line.split())) for line in card_as_string]
+        self.numbers = [list(map(int, line.split())) for line in card_as_string]
         self.hits = [[False for _ in range(5)] for _ in range(5)]
         self.is_winner = False
 
@@ -19,9 +19,8 @@ class Card:
                 return sum(self.hits[row][col] for row in range(5)) == 5
 
             return (
-                    any(sum(self.hits[row]) == 5 for row in range()) or  # completed row?
-                    any(col_selected(col) for col in range(5))  # completed column?
-            )
+                    any(sum(self.hits[row]) == 5 for row in range(5)) or  # completed row?
+                    any(col_selected(col) for col in range(5)))           # completed column?
 
         for ri in range(5):
             for ci in range(5):
@@ -37,10 +36,10 @@ def win_both():
     picks: list[int] = list(map(int, input_groups[0].split(',')))
     card_data_groups: list[str] = input_groups[1:]
     cards: list[Card] = [Card(card_data) for card_data in card_data_groups]
-    # hits = [[[False for r in range(5)] for c in range(5)] for b in range(len(cards))]
+    #hits = [[[False for r in range(5)] for c in range(5)] for b in range(len(cards))]
 
     for pick in picks:
-        for card, selected in cards:
+        for card in cards:
             if not card.is_winner:
                 card_wins = card.update(pick)
                 if card_wins:
