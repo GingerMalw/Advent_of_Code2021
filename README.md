@@ -1,4 +1,4 @@
-# Advent of Code 2021
+# Advent of Code 2021 - edition ABORTED
 
 Tasks made for fun, learning and expanding knowledge in the field of Python programming. 
 
